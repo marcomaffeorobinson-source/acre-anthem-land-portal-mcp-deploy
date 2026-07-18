@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: acre-anthem-land-portal-mcp
+    runtime: node
+    plan: starter
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build
+    startCommand: pnpm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AUTH_DISABLED
+        value: "false"
+      - key: MCP_PUBLIC_URL
+        sync: false
+      - key: AUTH_ISSUER
+        sync: false
+      - key: AUTH_AUDIENCE
+        sync: false
+      - key: AUTH_JWKS_URI
+        sync: false
+      - key: LAND_PORTAL_BASE_URL
+        value: https://api.landportal.com
+      - key: LAND_PORTAL_API_KEY
+        sync: false
